@@ -76,6 +76,7 @@ func (c *Cache) reapLoop() {
 			c.mu.Unlock()
 
 		case <-c.done:
+			println("done")
 			return
 		}
 	}

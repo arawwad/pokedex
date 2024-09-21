@@ -17,6 +17,8 @@ var config = serviceConfig{
 
 var cache = pockecache.NewCache(5 * time.Minute)
 
+var pokedex = make(map[string]pokemon)
+
 func main() {
 	defer cache.Stop()
 	startRepl()
