@@ -1,5 +1,5 @@
 package main
 
-func commandMap() error {
-	return getLocations(config.next, &config)
+func commandMap([]string) error {
+	return getLocations(config.next)
 }

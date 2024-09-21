@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func commandMapB() error {
+func commandMapB([]string) error {
 	prevUrl := config.previous
 
 	if prevUrl == "" {
@@ -11,5 +11,5 @@ func commandMapB() error {
 		return err
 	}
 
-	return getLocations(prevUrl, &config)
+	return getLocations(prevUrl)
 }

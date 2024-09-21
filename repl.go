@@ -4,12 +4,13 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func([]string) error
 }
 
 const prompt = "Pokedex > "
@@ -20,11 +21,16 @@ func startRepl() {
 	for {
 		fmt.Print(prompt)
 		scanner.Scan()
-		commandName := scanner.Text()
-		command, ok := commands[commandName]
+		input := strings.Fields(strings.TrimSpace(scanner.Text()))
+
+		if len(input) == 0 {
+			continue
+		}
+
+		command, ok := commands[input[0]]
 
 		if ok {
-			command.callback()
+			command.callback(input[1:])
 		} else {
 			fmt.Println("Command not found")
 		}
