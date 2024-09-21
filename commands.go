@@ -11,5 +11,6 @@ func init() {
 		"mapb":    {name: "mapb", description: "Get the previous locations", callback: commandMapB},
 		"explore": {name: "explore", description: "Explore Location", callback: commandExplore},
 		"catch":   {name: "catch", description: "Catch a pokemon by name", callback: commandCatch},
+		"inspect": {name: "inspect", description: "Inspect a pokemon you already caught", callback: commandInspect},
 	}
 }
