@@ -11,5 +11,11 @@ func commandMapB([]string) error {
 		return err
 	}
 
-	return getLocations(prevUrl)
+	locations, err := getLocations(prevUrl)
+
+	for _, value := range locations {
+		println(value)
+	}
+
+	return err
 }

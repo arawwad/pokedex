@@ -93,48 +93,48 @@ func getFromCacheOrServer(url string) ([]byte, error) {
 	return body, nil
 }
 
-func getLocations(url string) error {
+func getLocations(url string) ([]string, error) {
 	body, err := getFromCacheOrServer(url)
 	if err != nil {
-		return err
+		return []string{}, err
 	}
 
 	response := &locationsResponse{}
 	err = json.Unmarshal(body, response)
 
 	if err != nil {
-		return err
+		return []string{}, err
 	}
 
 	config.next = response.Next
 	config.previous = response.Previous
 
+	var locations []string
 	for _, value := range response.Results {
-		println(value.Name)
+		locations = append(locations, value.Name)
 	}
 
-	return nil
+	return locations, nil
 }
 
-func getLocation(name string) error {
+func getPokemonInLocation(name string) ([]string, error) {
 	body, err := getFromCacheOrServer(fmt.Sprintf("https://pokeapi.co/api/v2/location-area/%s", name))
 
 	if err != nil {
-		return err
+		return []string{}, err
 	}
 
 	response := &locationResponse{}
 	err = json.Unmarshal(body, response)
 
 	if err != nil {
-		return err
+		return []string{}, err
 	}
 
-	println("Found Pokemon:")
+	var pokemons []string
 	for _, value := range response.PokemonEncounters {
-		pokeLine := fmt.Sprintf("    - %s", value.Pokemon.Name)
-		println(pokeLine)
+		pokemons = append(pokemons, value.Pokemon.Name)
 	}
 
-	return nil
+	return pokemons, nil
 }

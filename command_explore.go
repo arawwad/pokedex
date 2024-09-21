@@ -8,7 +8,13 @@ func commandExplore(params []string) error {
 		return fmt.Errorf("user input was empty")
 	}
 
-	err := getLocation(params[0])
+	pokemons, err := getPokemonInLocation(params[0])
+
+	println("Found Pokemon:")
+	for _, value := range pokemons {
+		pokeLine := fmt.Sprintf("    - %s", value)
+		println(pokeLine)
+	}
 
 	return err
 }
